@@ -21,3 +21,11 @@ export type ProductType = {
 };
 
 export type ProductCreateType = Omit<ProductType, "id">;
+
+// 4. Sukurti InsertProductType; zr product.types.ts
+export type InsertProductType = {
+  id: string;
+  title: string;
+  price: number;
+  category: ProductCategoryType;
+};
