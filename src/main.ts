@@ -15,7 +15,7 @@
 // 8. Prasitestuot veikimą;
 // 9. CAO TS 12 VIDEO;
 import { Product } from "./features/product/Product.ts";
-import { Store } from "./features/store/store.type.ts";
+import { Store } from "./features/store/Store.ts";
 
 const store = new Store("Maxima");
 
@@ -66,10 +66,18 @@ console.log(milk.getProductInfo());
 console.log(potatoes.getProductInfo());
 console.log(freshChicken.getPrice());
 console.log(fish.setPrice(10.99));
+console.log(fish.getProductInfo());
 console.log(eggs.setPrice(1.25));
 console.log(bread.getProduct());
 
-store.insertProduct(banana.getProduct());
+store.insertProduct(milk);
+store.insertProduct(bread);
+store.insertProduct(eggs);
+store.insertProduct(freshChicken);
+store.insertProduct(fish);
+store.insertProduct(banana);
+store.insertProduct(potatoes);
+store.getAllProducts();
 
 const products = store.getAllProducts();
 console.log("products", products);
