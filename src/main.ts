@@ -15,7 +15,9 @@
 // 8. Prasitestuot veikimą;
 // 9. CAO TS 12 VIDEO;
 import { Product } from "./features/product/Product.ts";
+import { ProductCategoryType } from "./features/product/product.types.ts";
 import { Store } from "./features/store/Store.ts";
+import { addProductsToScreen } from "./utils/dom.ts";
 
 const store = new Store("Maxima");
 
@@ -61,6 +63,12 @@ const potatoes = new Product({
   category: "Vegetables",
 });
 
+const cola = new Product({
+  title: "Cola",
+  price: 1.89,
+  category: "Drinks",
+});
+
 console.log(store);
 console.log(milk.getProductInfo());
 console.log(potatoes.getProductInfo());
@@ -77,6 +85,52 @@ store.insertProduct(fish);
 store.insertProduct(banana);
 store.insertProduct(potatoes);
 store.getAllProducts();
+store.insertProduct(milk);
+store.insertProduct(cola);
 
 const products = store.getAllProducts();
 console.log("products", products);
+
+// 9. Padaryt apsaugą, kad produktas su tokiu pačiu title negalėtu būt pridedamas į Store; // vietoj pridėjimo į ekraną turi būt atvaizduotas console log su informacine žinute; zr. Store.ts
+
+// 1. Savo Produktų aplikacijai pridėti produkto pridėjimo iš ekrano funkcionalmą;
+
+const title = document.getElementById("title");
+const price = document.getElementById("price");
+const category = document.getElementById("category");
+const addProductButton = document.getElementById(
+  "add-product-btn"
+) as HTMLButtonElement;
+
+addProductButton.addEventListener("click", () => {
+  const product = new Product({
+    title: title.value,
+    price: Number(price.value),
+    category: category.value as ProductCategoryType,
+  });
+
+  console.log(product.getProductInfo());
+
+  // 2. Pridėtas produktas iš ekrano turi atsirasti Store klasės products property'je;
+  store.insertProduct(product.getProductInfo());
+
+  addProductsToScreen(store.getAllProducts());
+});
+
+// 3. Pridėtas produktas turi iškart atsidurt ekrane (Reiks pasinaudoti vienu iš klasės "Store" metudu). // užtikrinkit, kad po produkto pridėjimo ekrane neatsiranda daugiau produktų negu turėtu būt (išclearint wrapperį prieš į jį kažką dedant);
+const logProductsButton = document.getElementById(
+  "log-products-btn"
+) as HTMLButtonElement;
+
+logProductsButton.addEventListener("click", () => {
+  const products = store.getAllProducts();
+  console.log(products);
+});
+
+// 4. Visad pridedant naują produktą ekranas prieš tai turi but ištrinamas nuo senų produktų; ZR DOM.TS
+// 5. Paspaudus ant pirkinio turi būt išloginta informacija apie pirkinį. // Pirkinio informacija turi būt atvaizduojama per "Store" klasės metodą; zr dom.ts
+// 6. Į ekraną pridėti buttun'ą kurį paspaudus būtu iškviečiama fn getAllProducts bei tie produktai turi būt atvaizduojami consolėj; zr dom.ts
+// 7. Sukurti papildomą klasę "Cart". Klasė turi turėti property Products.
+// 8. Produktas į Cart turi būt patalpintas kai ant produkto yra paspaudžiama. // tas pats produktas prodžioje gali būt patalpintas daugiau nei vieną kartą;
+// 9. Padaryt apsaugą, kad tas pats produktas negalėtu būt patalpintas daugiau nei vieną kartą;
+// 10. Puslapio apačioje turi būt atvaizduota galutinė krepšelio kainą;
