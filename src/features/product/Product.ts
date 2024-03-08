@@ -7,7 +7,7 @@ import {
 
 import { generateId } from "../../utils/Id.ts";
 
-export class Product implements ProductType {
+export class Product {
   id: string;
   title: string;
   price: number;
@@ -26,8 +26,13 @@ export class Product implements ProductType {
   }
 
   // 5. Produktui pridėti metodą kuris sugražina visus produkto duomenis;
-  getProductInfo() {
-    return this.title, this.price, this.category, this.id;
+  getProductInfo(): ProductType {
+    return {
+      title: this.title,
+      price: this.price,
+      category: this.category,
+      id: this.id,
+    };
   }
 
   // 6. Product turi turė kainos setter'į ir getterį;
@@ -40,7 +45,4 @@ export class Product implements ProductType {
   }
 
   // 7. Product turi tuėt getProduct metodą, kuri gražina ProductType objektą;
-  getProduct() {
-    return Product;
-  }
 }

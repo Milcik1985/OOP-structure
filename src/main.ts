@@ -38,7 +38,7 @@ const eggs = new Product({
 });
 
 const freshChicken = new Product({
-  title: "Chisken",
+  title: "Chicken",
   price: 3,
   category: "Meat and meat products",
 });
@@ -65,10 +65,9 @@ console.log(store);
 console.log(milk.getProductInfo());
 console.log(potatoes.getProductInfo());
 console.log(freshChicken.getPrice());
-console.log(fish.setPrice(10.99));
+fish.setPrice(10.99);
 console.log(fish.getProductInfo());
 console.log(eggs.setPrice(1.25));
-console.log(bread.getProduct());
 
 store.insertProduct(milk);
 store.insertProduct(bread);
